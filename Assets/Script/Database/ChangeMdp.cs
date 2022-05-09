@@ -26,20 +26,21 @@ public class ChangeMdp : MonoBehaviour {
         string pwdNew = passwordNew.text;
         string pwdConfirm = passwordNewConfirm.text;
         int idUser = PlayerPrefs.GetInt("id");
-        
+            
         StartCoroutine (ModificationMdp (pwdOld, pwdNew, pwdConfirm, idUser));
     }
 
     IEnumerator ModificationMdp (string pwdOld,string pwdNew,string pwdConfirm, int id) {
 
         if (pwdNew == pwdConfirm) {
-            string newurl = url + "?passwordOld=" + UnityWebRequest.EscapeURL (pwdOld) 
-                                + "&passwordNew=" + UnityWebRequest.EscapeURL (pwdNew) 
+            string newurl = url + "?password_old=" + UnityWebRequest.EscapeURL (pwdOld) 
+                                + "&password_new=" + UnityWebRequest.EscapeURL (pwdNew) 
                                 + "&id=" + UnityWebRequest.EscapeURL (id.ToString());
             UnityWebRequest data = UnityWebRequest.Get (newurl);
             yield return data.SendWebRequest ();
 
             JSONNode parsedata = JSON.Parse (data.downloadHandler.text);
+            Debug.Log(parsedata);
             if (parsedata["success"] != null) {
                 OpenMessage();
                 txtMessageChangementMdp.text = parsedata["success"];

@@ -47,12 +47,12 @@ public class SnakeController : MonoBehaviour
 
     private bool isLoose = false;
     [SerializeField]
-    private string url = ""; 
+    private string url = "";
     private int idUser = -1;
     private int scoreUser = 0;
     private string pseudoUser = "";
     private float res = 0;
-    
+
     void Start()
     {
 
@@ -89,38 +89,46 @@ public class SnakeController : MonoBehaviour
             }
         }
 
-        
+
     }
-    
-    public void Toggle() {
+
+    public void Toggle()
+    {
         //permet d'activer le ui pause ou de le déactiver et vice versa
         panelPause.SetActive(!panelPause.activeSelf);
 
         //si le menu est activé  le jeu et figé en mode pause
-        if(panelPause.activeSelf == true) {
+        if (panelPause.activeSelf == true)
+        {
             //active le curseur du champs de vision
             Cursor.visible = true;
             Time.timeScale = 0f;
-        } else {
+        }
+        else
+        {
             Cursor.visible = false;
             Time.timeScale = 1f;
         }
     }
 
-    public void AddBodyPart(int _appel) {
+    public void AddBodyPart(int _appel)
+    {
         StartCoroutine(WaitBodySnake(_appel));
-        if (_appel == 1) {
+        if (_appel == 1)
+        {
             //incrementation du score a chaque pomme avale
             score = score + appelClassic;
         }
 
-        if (_appel == 3) {
+        if (_appel == 3)
+        {
             //incrementation du score a chaque pomme avale
             score = score - appelRotten;
             speedMove += 0.05f;
         }
 
-        if (_appel == 5) {
+        if (_appel == 5)
+        {
             //incrementation du score a chaque pomme avale
             score = score + appelGold;
         }
@@ -134,25 +142,29 @@ public class SnakeController : MonoBehaviour
         AddSpeed();
     }
 
-    private void AddSpeed() {
-        if (score / 100 > res) {
+    private void AddSpeed()
+    {
+        if (score / 100 > res)
+        {
             res += 1;
             speedMove += 0.2f;
         }
     }
 
-    private void MoveBody() {
+    private void MoveBody()
+    {
         //gestion de la translation
         float move = speedMove * Time.deltaTime;
-        bodyParts[0].Translate(Vector3.forward*speedMove*Time.deltaTime);
+        bodyParts[0].Translate(Vector3.forward * speedMove * Time.deltaTime);
 
         //gestion de la rotation
         float rotation = Input.GetAxis("Horizontal") * speedRotation * Time.deltaTime;
-        
+
         bodyParts[0].Rotate(new Vector3(0, rotation, 0));
 
         //gestion du mouvement des autres parties
-        for (int i = 1; i < bodyParts.Count; i++) {
+        for (int i = 1; i < bodyParts.Count; i++)
+        {
 
             Transform currentBodyPart = bodyParts[i];
             Transform previousBodyPart = bodyParts[i - 1];
@@ -163,7 +175,8 @@ public class SnakeController : MonoBehaviour
             newPosition.y = bodyParts[0].transform.position.y;
             float t = Time.deltaTime * distance / minDistance * curveSpeed;
 
-            if (t > 0.5f) {
+            if (t > 0.5f)
+            {
                 t = 0.5f;
             }
             currentBodyPart.position = Vector3.Slerp(currentBodyPart.position, newPosition, t);
@@ -171,32 +184,38 @@ public class SnakeController : MonoBehaviour
         }
     }
 
-    public void Loose() {
+    public void Loose()
+    {
         isLoose = true;
         Cursor.visible = true;
 
         //active ui loose avec le score
         panelResultat.SetActive(true);
 
-        if (score > scoreUser){
+        if (score > scoreUser)
+        {
             TxtResultat.text = "Bien jouer";
             TxtResultatScore.text = "Nouveau Record !!\n Votre score est de : " + score;
             PlayerPrefs.SetInt("score", score);
             StartCoroutine(SaveScore());
-        } else {
+        }
+        else
+        {
             TxtResultat.text = "Perdu";
             TxtResultatScore.text = "Dommage !!\n Votre score est de : " + score;
         }
     }
 
-    IEnumerator WaitBodySnake(int _appel) {
-        for (int i = 0; i < _appel; i++) {
+    IEnumerator WaitBodySnake(int _appel)
+    {
+        for (int i = 0; i < _appel; i++)
+        {
             //creation d'une partie du corps, puis on l'ajoute au corp
-            GameObject newPartObj = Instantiate(bodyPartPrefab, new Vector3 (
-                                                                    bodyParts[bodyParts.Count - 1].position.x, 
-                                                                    bodyParts[bodyParts.Count - 1].position.y, 
+            GameObject newPartObj = Instantiate(bodyPartPrefab, new Vector3(
+                                                                    bodyParts[bodyParts.Count - 1].position.x,
+                                                                    bodyParts[bodyParts.Count - 1].position.y,
                                                                     bodyParts[bodyParts.Count - 1].position.z + 1f
-                                                                    ), 
+                                                                    ),
                                                                     bodyParts[bodyParts.Count - 1].rotation) as GameObject;
             Transform newPart = newPartObj.transform;
             newPart.SetParent(this.transform);
@@ -206,14 +225,15 @@ public class SnakeController : MonoBehaviour
         }
     }
 
-    IEnumerator SaveScore() {
-        string newurl = url + "?id=" + UnityWebRequest.EscapeURL(idUser.ToString()) 
+    IEnumerator SaveScore()
+    {
+        string newurl = url + "?id=" + UnityWebRequest.EscapeURL(idUser.ToString())
                             + "&score=" + UnityWebRequest.EscapeURL(score.ToString())
-                            + "&game=" + UnityWebRequest.EscapeURL("snake"); 
-                                    
-                //creer une url qui va appeller /score
-                UnityWebRequest data = UnityWebRequest.Get(newurl);
-                yield return data.SendWebRequest();   
+                            + "&game=" + UnityWebRequest.EscapeURL("snake");
+
+        //creer une url qui va appeller /score
+        UnityWebRequest data = UnityWebRequest.Get(newurl);
+        yield return data.SendWebRequest();
     }
 }
 

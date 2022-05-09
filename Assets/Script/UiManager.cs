@@ -19,8 +19,6 @@ public class UiManager : MonoBehaviour
     private GameObject panelMessageRestore = null;
     //panel Menu
     [SerializeField]
-    private GameObject panelClassement = null;
-    [SerializeField]
     private GameObject panelOption = null;
     [SerializeField]
     private GameObject panelMenu = null;
@@ -73,11 +71,6 @@ public class UiManager : MonoBehaviour
         panelMessageRestore.SetActive(false);
     }
 
-    // action panel menu
-    public void ClassementClose() {
-        panelClassement.SetActive(false);
-    }
-
     public void OptionsOpen() {
         panelOption.SetActive(true);
         panelMenu.SetActive(false);
@@ -98,9 +91,9 @@ public class UiManager : MonoBehaviour
         panelChangementMdp.SetActive(false);
     }
 
-    public void MessageChangementMdpToChangementMdp() {
+    public void MessageChangementMdpToMenu() {
         panelMessageChangementMdp.SetActive(false);
-        panelChangementMdp.SetActive(true);
+        panelMenu.SetActive(true);
     }
 
     public void MessageSupportToSupport() {
