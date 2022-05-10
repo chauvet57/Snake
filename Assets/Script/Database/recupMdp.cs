@@ -18,8 +18,6 @@ public class recupMdp : MonoBehaviour
     [SerializeField]
     private GameObject panelRestoreMdp = null;
     [SerializeField]
-    private GameObject panelLogin = null;
-    [SerializeField]
     private Text txtMessageRestore = null;
 
     public void controlMail() {
@@ -40,27 +38,39 @@ public class recupMdp : MonoBehaviour
         
         UnityWebRequest data = UnityWebRequest.Get(newurl);
         yield return data.SendWebRequest();
-        
-        if (data.isNetworkError) { 
-            OpenMessage();
-            txtMessageRestore.text = "Mdp non envoyé il y a une erreur " + data.error;
 
-        } else {
-            JSONNode parsedata = JSON.Parse(data.downloadHandler.text);
-           
-            if (parsedata["success"] != null) {
+        switch (data.result)
+        {
+            case UnityWebRequest.Result.ConnectionError:
+            case UnityWebRequest.Result.DataProcessingError:
                 OpenMessage();
-                txtMessageRestore.text = parsedata["success"] + mail ;
+                txtMessageRestore.text = "Mdp non envoyé il y a une erreur " + data.error;
+                break;
+            case UnityWebRequest.Result.ProtocolError:
+                Debug.LogError(": HTTP Error: " + data.error);
+                break;
+            case UnityWebRequest.Result.Success:
+                JSONNode parsedata = JSON.Parse(data.downloadHandler.text);
 
-            } else if (parsedata["error"] != null) {
-                OpenMessage();
-                txtMessageRestore.text = parsedata["error"];
-            } else {
-                OpenMessage();
-                txtMessageRestore.text = "Problème de connexion a votre compte, essayer à nouveau !";
-            }
+                if (parsedata["success"] != null)
+                {
+                    OpenMessage();
+                    txtMessageRestore.text = parsedata["success"] + mail;
+
+                }
+                else if (parsedata["error"] != null)
+                {
+                    OpenMessage();
+                    txtMessageRestore.text = parsedata["error"];
+                }
+                else
+                {
+                    OpenMessage();
+                    txtMessageRestore.text = "Problème de connexion a votre compte, essayer à nouveau !";
+                }
+                break;
         }
-	}
+    }
 
     bool IsValidEmail(string email) {
         return Regex.IsMatch(email, @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*@((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))\z");

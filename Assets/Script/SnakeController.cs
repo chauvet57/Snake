@@ -30,7 +30,7 @@ public class SnakeController : MonoBehaviour
     private int score = 0;
     [SerializeField]
     private AudioClip eatingSound = null;
-    private AudioSource audio;
+    private new AudioSource audio;
 
     private int appelClassic = 10;
     private int appelGold = 60;

@@ -32,29 +32,41 @@ public class LoginScript : MonoBehaviour {
                             + "&game=" + UnityWebRequest.EscapeURL("snake");
         UnityWebRequest data = UnityWebRequest.Get(newurl);
         yield return data.SendWebRequest();
-        
-        if (data.isNetworkError) {
-            OpenMessage();
-            txtMessage.text = "Erreur dans le Pseudo et/ou Mot de passe \n Veuillez vérifier !";
-        
-        } else {
-            JSONNode parsedata = JSON.Parse(data.downloadHandler.text);
-            if (parsedata["user"] != null) {
-                PlayerPrefs.SetInt("id", parsedata["user"]["id"]);
-                PlayerPrefs.SetString("pseudo", parsedata["user"]["pseudo"]);
-                PlayerPrefs.SetInt("score", parsedata["user"]["score"]);
-                PlayerPrefs.SetString("email", parsedata["user"]["email"]);
 
-                SceneManager.LoadScene(sceneCharge);
-            } else if (parsedata["error"] != null) {
+        switch (data.result)
+        {
+            case UnityWebRequest.Result.ConnectionError:
+            case UnityWebRequest.Result.DataProcessingError:
                 OpenMessage();
-                txtMessage.text = parsedata["error"];
-            } else {
-                OpenMessage();
-                txtMessage.text = "Problème de connexion a votre compte, essayer à nouveau !";
-            }
+                txtMessage.text = "Erreur dans le Pseudo et/ou Mot de passe \n Veuillez vérifier !";
+                break;
+            case UnityWebRequest.Result.ProtocolError:
+                Debug.LogError(": HTTP Error: " + data.error);
+                break;
+            case UnityWebRequest.Result.Success:
+                JSONNode parsedata = JSON.Parse(data.downloadHandler.text);
+                if (parsedata["user"] != null)
+                {
+                    PlayerPrefs.SetInt("id", parsedata["user"]["id"]);
+                    PlayerPrefs.SetString("pseudo", parsedata["user"]["pseudo"]);
+                    PlayerPrefs.SetInt("score", parsedata["user"]["score"]);
+                    PlayerPrefs.SetString("email", parsedata["user"]["email"]);
+
+                    SceneManager.LoadScene(sceneCharge);
+                }
+                else if (parsedata["error"] != null)
+                {
+                    OpenMessage();
+                    txtMessage.text = parsedata["error"];
+                }
+                else
+                {
+                    OpenMessage();
+                    txtMessage.text = "Problème de connexion a votre compte, essayer à nouveau !";
+                }
+                break;
         }
-	}
+    }
 
     public void OpenMessage() {
         panelLogin.SetActive(false);

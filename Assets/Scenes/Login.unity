@@ -4077,7 +4077,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 957748687}
         m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
-        m_MethodName: MessageToLogin
+        m_MethodName: MessageRegisterToRegister
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6324,7 +6324,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1646705958}
         m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
-        m_MethodName: MessageToLogin
+        m_MethodName: MessageRegisterToRegister
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

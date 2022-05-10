@@ -44,25 +44,37 @@ public class messageScript : MonoBehaviour
         
         UnityWebRequest data = UnityWebRequest.Get(newurl);
         yield return data.SendWebRequest();
-        
-        if (data.isNetworkError) { 
-            OpenMessage();
-            txtMessageSupport.text = "Mdp non envoyé il y a une erreur " + data.error;
 
-        } else {
-            JSONNode parsedata = JSON.Parse(data.downloadHandler.text);
-           
-            if (parsedata["success"] != null) {
+        switch (data.result)
+        {
+            case UnityWebRequest.Result.ConnectionError:
+            case UnityWebRequest.Result.DataProcessingError:
                 OpenMessage();
-                txtMessageSupport.text = parsedata["success"] ;
+                txtMessageSupport.text = "Mdp non envoyé il y a une erreur " + data.error;
+                break;
+            case UnityWebRequest.Result.ProtocolError:
+                Debug.LogError(": HTTP Error: " + data.error);
+                break;
+            case UnityWebRequest.Result.Success:
+                JSONNode parsedata = JSON.Parse(data.downloadHandler.text);
 
-            } else if (parsedata["error"] != null) {
-                OpenMessage();
-                txtMessageSupport.text = parsedata["error"];
-            } else {
-                OpenMessage();
-                txtMessageSupport.text = "Problème de connexion a votre compte, essayer à nouveau !";
-            }
+                if (parsedata["success"] != null)
+                {
+                    OpenMessage();
+                    txtMessageSupport.text = parsedata["success"];
+
+                }
+                else if (parsedata["error"] != null)
+                {
+                    OpenMessage();
+                    txtMessageSupport.text = parsedata["error"];
+                }
+                else
+                {
+                    OpenMessage();
+                    txtMessageSupport.text = "Problème de connexion a votre compte, essayer à nouveau !";
+                }
+                break;
         }
 	}
 
