@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class Jouer : MonoBehaviour
 {
     [SerializeField]
-    private string SceneCharge = null;
+    private string sceneCharge = null;
 
     public void PlayGame() {
-        SceneManager.LoadScene(SceneCharge);
+        Transition.Out(sceneCharge);
         Time.timeScale = 1f;
         Cursor.visible = false;
     }

@@ -52,7 +52,7 @@ public class LoginScript : MonoBehaviour {
                     PlayerPrefs.SetInt("score", parsedata["user"]["score"]);
                     PlayerPrefs.SetString("email", parsedata["user"]["email"]);
 
-                    SceneManager.LoadScene(sceneCharge);
+                    Transition.Out(sceneCharge);
                 }
                 else if (parsedata["error"] != null)
                 {

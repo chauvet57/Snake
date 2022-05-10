@@ -366,6 +366,7 @@
 "Assets/Script/selectionInput.cs"
 "Assets/Script/SnakeController.cs"
 "Assets/Script/UiManager.cs"
+"Assets/Transition/Transition.cs"
 "Assets/WarningLimit.cs"
 -langversion:9.0
 

@@ -16,7 +16,7 @@ public class ChangeScene : MonoBehaviour
 
     public void LoadScene()
     {
-        SceneManager.LoadScene(sceneCharge);
+        Transition.Out(sceneCharge);
         Cursor.visible = true;
     }
 }

@@ -76,6 +76,7 @@
     <Compile Include="Assets\Script\BodySnakeController.cs" />
     <Compile Include="Assets\Script\FoodSpawner.cs" />
     <Compile Include="Assets\Script\BackGame.cs" />
+    <Compile Include="Assets\Transition\Transition.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
