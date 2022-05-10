@@ -8,6 +8,7 @@ TagManager:
   - AppelRotten
   - AppelGold
   - Border
+  - input
   layers:
   - Default
   - TransparentFX

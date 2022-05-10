@@ -10,7 +10,7 @@ public class ChangeScene : MonoBehaviour
 
     public void MenuGame() {
         FindObjectOfType<SnakeController>().Toggle();
-        SceneManager.LoadScene(sceneCharge);
+        Transition.Out(sceneCharge);
         Cursor.visible = true;
     }
 

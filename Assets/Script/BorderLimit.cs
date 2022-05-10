@@ -24,7 +24,7 @@ public class BorderLimit : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             //alors on bloque le jeu
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
 
             //recuperation de la fonction perdu dans le script snake controller
             SnakeController sc = collision.gameObject.GetComponentInParent<SnakeController>();

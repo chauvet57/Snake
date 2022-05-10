@@ -291,6 +291,7 @@ GameObject:
   - component: {fileID: 97015803}
   - component: {fileID: 97015802}
   - component: {fileID: 97015801}
+  - component: {fileID: 97015805}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -382,6 +383,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &97015805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97015800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4be4c9337d7ba9c41bb99b4d40a4034e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &114747545
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +485,7 @@ GameObject:
   - component: {fileID: 145796047}
   m_Layer: 5
   m_Name: Password
-  m_TagString: Untagged
+  m_TagString: input
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1324,7 +1337,7 @@ GameObject:
   - component: {fileID: 394161867}
   m_Layer: 5
   m_Name: BtnDeconnexion
-  m_TagString: Untagged
+  m_TagString: input
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3060,7 +3073,7 @@ GameObject:
   - component: {fileID: 768857453}
   m_Layer: 5
   m_Name: BtnLogin
-  m_TagString: Untagged
+  m_TagString: input
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3468,7 +3481,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 808040966}
   transitionTime: 0.5
-  sceneCharge: MenuPrincipal
 --- !u!1 &829744928
 GameObject:
   m_ObjectHideFlags: 0
@@ -4812,7 +4824,7 @@ GameObject:
   - component: {fileID: 1164749222}
   m_Layer: 5
   m_Name: Email
-  m_TagString: Untagged
+  m_TagString: input
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5747,7 +5759,7 @@ GameObject:
   - component: {fileID: 1399050116}
   m_Layer: 5
   m_Name: BtnRegister
-  m_TagString: Untagged
+  m_TagString: input
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6819,7 +6831,7 @@ GameObject:
   - component: {fileID: 1810146558}
   m_Layer: 5
   m_Name: BtnRestore
-  m_TagString: Untagged
+  m_TagString: input
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

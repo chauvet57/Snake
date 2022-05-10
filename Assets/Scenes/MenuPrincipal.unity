@@ -5357,6 +5357,10 @@ PrefabInstance:
       propertyPath: sceneCharge
       value: Main
       objectReference: {fileID: 0}
+    - target: {fileID: 9163324153584033021, guid: 1f9690a507815d249a38aefe7b98e81f, type: 3}
+      propertyPath: transitionTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f9690a507815d249a38aefe7b98e81f, type: 3}
 --- !u!224 &1514983260 stripped

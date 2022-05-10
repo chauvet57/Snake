@@ -347,10 +347,10 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
-"Assets/ChangeEmail.cs"
 "Assets/Script/BackGame.cs"
 "Assets/Script/BodySnakeController.cs"
 "Assets/Script/BorderLimit.cs"
+"Assets/Script/ChangeEmail.cs"
 "Assets/Script/ChangeScene.cs"
 "Assets/Script/Database/ChangeMdp.cs"
 "Assets/Script/Database/Classement.cs"
@@ -363,11 +363,12 @@
 "Assets/Script/FoodSpawner.cs"
 "Assets/Script/Jouer.cs"
 "Assets/Script/Quitter.cs"
+"Assets/Script/Result.cs"
 "Assets/Script/selectionInput.cs"
 "Assets/Script/SnakeController.cs"
 "Assets/Script/UiManager.cs"
+"Assets/Script/WarningLimit.cs"
 "Assets/Transition/Transition.cs"
-"Assets/WarningLimit.cs"
 -langversion:9.0
 
 /deterministic

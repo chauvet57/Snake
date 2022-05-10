@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Transition : MonoBehaviour
 {
     [SerializeField]
-    Animator animator = null;
+    private Animator animator = null;
     public float transitionTime = 1f;
     private string sceneCharge;
 

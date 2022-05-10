@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
-using UnityEngine.Networking;
 
 public class SnakeController : MonoBehaviour
 {
@@ -38,16 +37,8 @@ public class SnakeController : MonoBehaviour
 
     [SerializeField]
     private GameObject panelPause = null;
-    [SerializeField]
-    private GameObject panelResultat = null;
-    [SerializeField]
-    private Text TxtResultat = null;
-    [SerializeField]
-    private Text TxtResultatScore = null;
 
     private bool isLoose = false;
-    [SerializeField]
-    private string url = "";
     private int idUser = -1;
     private int scoreUser = 0;
     private string pseudoUser = "";
@@ -187,23 +178,9 @@ public class SnakeController : MonoBehaviour
     public void Loose()
     {
         isLoose = true;
+        Transition.Out("GameOver");
         Cursor.visible = true;
-
-        //active ui loose avec le score
-        panelResultat.SetActive(true);
-
-        if (score > scoreUser)
-        {
-            TxtResultat.text = "Bien jouer";
-            TxtResultatScore.text = "Nouveau Record !!\n Votre score est de : " + score;
-            PlayerPrefs.SetInt("score", score);
-            StartCoroutine(SaveScore());
-        }
-        else
-        {
-            TxtResultat.text = "Perdu";
-            TxtResultatScore.text = "Dommage !!\n Votre score est de : " + score;
-        }
+        PlayerPrefs.SetInt("scoreNew", score);
     }
 
     IEnumerator WaitBodySnake(int _appel)
@@ -223,17 +200,6 @@ public class SnakeController : MonoBehaviour
 
             yield return new WaitForSeconds(0.2f);
         }
-    }
-
-    IEnumerator SaveScore()
-    {
-        string newurl = url + "?id=" + UnityWebRequest.EscapeURL(idUser.ToString())
-                            + "&score=" + UnityWebRequest.EscapeURL(score.ToString())
-                            + "&game=" + UnityWebRequest.EscapeURL("snake");
-
-        //creer une url qui va appeller /score
-        UnityWebRequest data = UnityWebRequest.Get(newurl);
-        yield return data.SendWebRequest();
     }
 }
 

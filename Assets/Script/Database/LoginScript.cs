@@ -20,8 +20,8 @@ public class LoginScript : MonoBehaviour {
     public Text txtMessage = null;
     
 	public void LoginAc(){
-		
-		string mail = email.text;
+
+        string mail = email.text;
 		string pwd = password.text;
         StartCoroutine(SubmitLogin (mail, pwd));
 	}
@@ -50,6 +50,7 @@ public class LoginScript : MonoBehaviour {
                     PlayerPrefs.SetInt("id", parsedata["user"]["id"]);
                     PlayerPrefs.SetString("pseudo", parsedata["user"]["pseudo"]);
                     PlayerPrefs.SetInt("score", parsedata["user"]["score"]);
+                    PlayerPrefs.SetInt("scoreNew", 0);
                     PlayerPrefs.SetString("email", parsedata["user"]["email"]);
 
                     Transition.Out(sceneCharge);
