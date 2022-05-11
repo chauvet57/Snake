@@ -29,6 +29,8 @@ public class SnakeController : MonoBehaviour
     private int score = 0;
     [SerializeField]
     private AudioClip eatingSound = null;
+    [SerializeField]
+    private AudioClip die = null;
     private new AudioSource audio;
 
     private int appelClassic = 10;
@@ -49,20 +51,17 @@ public class SnakeController : MonoBehaviour
 
         //ajout a la tete du serpent
         bodyParts.Add(headPart.transform);
-
         //initialisation du score
         score = 0;
-
         //initialisation defaite
         isLoose = false;
-
         //recuperation du composant audio
         audio = this.GetComponent<AudioSource>();
-
+        // set des valeur de l'utilisateur mis en base de données
         idUser = PlayerPrefs.GetInt("id");
         pseudoUser = PlayerPrefs.GetString("pseudo");
         scoreUser = PlayerPrefs.GetInt("score");
-
+        //affichage des infos du joueur
         pseudoText.text = "Pseudo : " + pseudoUser;
         recordText.text = "Record : " + scoreUser;
     }
@@ -87,7 +86,6 @@ public class SnakeController : MonoBehaviour
     {
         //permet d'activer le ui pause ou de le déactiver et vice versa
         panelPause.SetActive(!panelPause.activeSelf);
-
         //si le menu est activé  le jeu et figé en mode pause
         if (panelPause.activeSelf == true)
         {
@@ -105,30 +103,25 @@ public class SnakeController : MonoBehaviour
     public void AddBodyPart(int _appel)
     {
         StartCoroutine(WaitBodySnake(_appel));
-        if (_appel == 1)
+        //incrementation du score a chaque pomme avale
+        switch (_appel)
         {
-            //incrementation du score a chaque pomme avale
-            score = score + appelClassic;
+            case 1:
+                score = score + appelClassic;
+                break;
+            case 3:
+                score = score - appelRotten;
+                speedMove += 0.05f;
+                break;
+            case 5:
+                score = score + appelGold;
+                break;
+            default:
+                break;
         }
-
-        if (_appel == 3)
-        {
-            //incrementation du score a chaque pomme avale
-            score = score - appelRotten;
-            speedMove += 0.05f;
-        }
-
-        if (_appel == 5)
-        {
-            //incrementation du score a chaque pomme avale
-            score = score + appelGold;
-        }
-
         scoreText.text = "Score : " + score;
-
         //jouer le son manger
         audio.PlayOneShot(eatingSound);
-
         //augmentation de la vitesse
         AddSpeed();
     }
@@ -156,7 +149,6 @@ public class SnakeController : MonoBehaviour
         //gestion du mouvement des autres parties
         for (int i = 1; i < bodyParts.Count; i++)
         {
-
             Transform currentBodyPart = bodyParts[i];
             Transform previousBodyPart = bodyParts[i - 1];
             float distance = Vector3.Distance(previousBodyPart.position, currentBodyPart.position);
@@ -177,7 +169,10 @@ public class SnakeController : MonoBehaviour
 
     public void Loose()
     {
+        //jouer le son de la mort
+        audio.PlayOneShot(die);
         isLoose = true;
+        speedMove = 0f;
         Transition.Out("GameOver");
         Cursor.visible = true;
         PlayerPrefs.SetInt("scoreNew", score);

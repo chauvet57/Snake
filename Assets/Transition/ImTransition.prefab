@@ -112,4 +112,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   transitionTime: 0.5
-  sceneCharge: 

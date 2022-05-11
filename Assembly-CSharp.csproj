@@ -60,9 +60,11 @@
     <Compile Include="Assets\Script\Database\SimpleJSON.cs" />
     <Compile Include="Assets\Script\FoodController.cs" />
     <Compile Include="Assets\Script\Database\Insert.cs" />
+    <Compile Include="Assets\Transition\Transition.cs" />
     <Compile Include="Assets\Script\Database\messageScript.cs" />
     <Compile Include="Assets\Script\selectionInput.cs" />
     <Compile Include="Assets\Script\Jouer.cs" />
+    <Compile Include="Assets\Script\Result.cs" />
     <Compile Include="Assets\Script\UiManager.cs" />
     <Compile Include="Assets\Script\Database\recupMdp.cs" />
     <Compile Include="Assets\Script\SnakeController.cs" />
@@ -76,14 +78,11 @@
     <Compile Include="Assets\Script\BodySnakeController.cs" />
     <Compile Include="Assets\Script\FoodSpawner.cs" />
     <Compile Include="Assets\Script\BackGame.cs" />
-    <Compile Include="Assets\Transition\Transition.cs" />
-    <Compile Include="Assets\Script\Result.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
-    <None Include="Assets\Decor\Skybox\8K Skybox Pack Free\ReadMe.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />

@@ -6,33 +6,34 @@ using UnityEngine.EventSystems;
 
 public class selectionInput : MonoBehaviour
 {
-    public EventSystem system = null;
-    public InputField inputField = null;
-    
-    
-    void Start() {
+    [SerializeField]
+    private GameObject[] gameObjects;
+    private int i = 0;
+
+    void Start()
+    {
         SelectInput();
-        system = EventSystem.current;
-        
     }
 
-    void Update() {
-          if (Input.GetKeyDown(KeyCode.Tab)) {
-            Selectable next = system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
-            if (next != null) {
-             
-                InputField inputfield = next.GetComponent<InputField>();
-                if (inputfield != null){
-                    inputfield.OnPointerClick(new PointerEventData(system));
-                }
-                system.SetSelectedGameObject(next.gameObject, new BaseEventData(system));
+    void Update() 
+    {
+        if (Input.GetKeyDown(KeyCode.Tab)) 
+        {
+            if ( i >= gameObjects.Length - 1)
+            {
+                i = 0;
+            }
+            else
+            {
+                i++;
             }
             SelectInput();
         }
     }
 
-    public void SelectInput() {
-        EventSystem.current.SetSelectedGameObject(inputField.gameObject, null);
-        inputField.OnPointerClick(new PointerEventData(EventSystem.current));
+    public void SelectInput() 
+    {
+        gameObjects = GameObject.FindGameObjectsWithTag("input");
+        EventSystem.current.SetSelectedGameObject(gameObjects[i], null);
     }
 }
